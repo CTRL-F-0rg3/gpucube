@@ -1,0 +1,16 @@
+[package]
+name = "gpucube"
+version = "0.1.0"
+edition = "2024"
+
+
+[dependencies]
+wgpu = "0.20.1"
+winit = "0.30.13"
+glam = "0.32.1"
+slotmap = "1.1.1"
+log = "0.4.22"
+env_logger = "0.11.10"
+pollster = "0.4.0"
+thiserror = "2.0"
+bytemuck = "1.21"
