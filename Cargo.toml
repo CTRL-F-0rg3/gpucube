@@ -2,7 +2,9 @@
 name = "gpucube"
 version = "0.1.0"
 edition = "2024"
-
+description = "A stabilization layer for wgpu to maintain consistent behavior across API changes."
+license = "MIT"
+repository = "https://github.com/CTRL-F-0rg3/gpucube"
 
 [dependencies]
 wgpu = "0.20.1"
