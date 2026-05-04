@@ -1,5 +1,3 @@
-// Derive macros z bytemuck — działają gdy Cargo.toml ma:
-// bytemuck = { version = "1.21", features = ["derive"] }
 use bytemuck::{Pod, Zeroable};
 use crate::{basic::buffer::TypedBuffer, core::context::GpuContext};
 
@@ -7,8 +5,12 @@ use crate::{basic::buffer::TypedBuffer, core::context::GpuContext};
 
 /// Standardowy wierzchołek: pozycja + normalna + UV.
 /// Możesz zdefiniować własny typ — Mesh<V> jest generyczne.
+///
+/// Wymaga w Cargo.toml:
+/// bytemuck = { version = "1.21", features = ["derive"] }
 #[repr(C)]
-#[derive(Debug, Clone, Copy, Pod, Zeroable)]
+#[derive(Debug, Clone, Copy)]
+#[derive(bytemuck::Pod, bytemuck::Zeroable)]
 pub struct Vertex {
     pub position: [f32; 3],
     pub normal:   [f32; 3],

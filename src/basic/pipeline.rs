@@ -135,12 +135,14 @@ impl<'a> RenderPipelineBuilder<'a> {
             layout: Some(&layout),
             vertex: VertexState {
                 module: d.shader,
-                entry_point: d.vs_entry,  // wgpu 0.19: &str, nie Option<&str>
+                entry_point: Some(d.vs_entry),
+                compilation_options: wgpu::PipelineCompilationOptions::default(),
                 buffers: d.vertex_layouts,
             },
             fragment: Some(FragmentState {
                 module: d.shader,
-                entry_point: d.fs_entry,  // wgpu 0.19: &str, nie Option<&str>
+                entry_point: Some(d.fs_entry),
+                compilation_options: wgpu::PipelineCompilationOptions::default(),
                 targets: &[Some(ColorTargetState {
                     format: d.color_format,
                     blend: d.blend,
@@ -157,7 +159,6 @@ impl<'a> RenderPipelineBuilder<'a> {
             depth_stencil,
             multisample: MultisampleState::default(),
             multiview: None,
-            // cache: None  — dodane w wgpu 0.20, nie istnieje w 0.19
         })
     }
 }
