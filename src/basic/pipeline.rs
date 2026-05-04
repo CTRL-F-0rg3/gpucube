@@ -135,13 +135,13 @@ impl<'a> RenderPipelineBuilder<'a> {
             layout: Some(&layout),
             vertex: VertexState {
                 module: d.shader,
-                entry_point: Some(d.vs_entry),
+                entry_point: d.vs_entry,
                 compilation_options: wgpu::PipelineCompilationOptions::default(),
                 buffers: d.vertex_layouts,
             },
             fragment: Some(FragmentState {
                 module: d.shader,
-                entry_point: Some(d.fs_entry),
+                entry_point: d.fs_entry,
                 compilation_options: wgpu::PipelineCompilationOptions::default(),
                 targets: &[Some(ColorTargetState {
                     format: d.color_format,

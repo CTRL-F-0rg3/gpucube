@@ -5,17 +5,18 @@ use crate::{basic::buffer::TypedBuffer, core::context::GpuContext};
 
 /// Standardowy wierzchołek: pozycja + normalna + UV.
 /// Możesz zdefiniować własny typ — Mesh<V> jest generyczne.
-///
-/// Wymaga w Cargo.toml:
-/// bytemuck = { version = "1.21", features = ["derive"] }
 #[repr(C)]
 #[derive(Debug, Clone, Copy)]
-#[derive(bytemuck::Pod, bytemuck::Zeroable)]
 pub struct Vertex {
     pub position: [f32; 3],
     pub normal:   [f32; 3],
     pub uv:       [f32; 2],
 }
+
+// Ręczna implementacja — bezpieczna bo Vertex to #[repr(C)] z samych f32
+// (typy Pod + Zeroable), bez paddingu, bez wskaźników.
+unsafe impl Zeroable for Vertex {}
+unsafe impl Pod     for Vertex {}
 
 impl Vertex {
     pub const fn new(position: [f32; 3], normal: [f32; 3], uv: [f32; 2]) -> Self {
